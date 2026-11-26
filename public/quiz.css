@@ -126,3 +126,18 @@
         font-size: 20px;
     }
 }
+h1 {
+color: #b84a78;
+letter-spacing: 2px;
+}
+
+button {
+border-radius: 25px;
+transition: all 0.3s ease;
+}
+
+button:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 15px #e9a0bf;
+}
+
