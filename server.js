@@ -177,3 +177,30 @@ app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`Config: ${PROVIDER} - ${MODEL}`);
 });
+
+// ファッション提案用API
+app.post('/api/fashion', async (req, res) => {
+try {
+const { temperature, occasion, style, preference } = req.body;
+
+const template = fs.readFileSync('fashion-prompt.md', 'utf8');
+
+const finalPrompt = fillTemplate(template, {
+temperature,
+occasion,
+style,
+preference
+});
+
+const result = await callOpenAI(finalPrompt);
+
+res.json({ data: result });
+
+} catch (error) {
+console.error('Fashion API Error:', error);
+res.status(500).json({
+error: 'コーディネートの生成に失敗しました。'
+});
+}
+});
+
